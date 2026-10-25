@@ -15,7 +15,6 @@ export const PROVIDERS = {
         envKey: 'NVIDIA_API_KEY',
     },
     zai: {
-        // Source tierce uniquement : à confirmer dans la doc de Z.ai.
         baseUrl: 'https://api.z.ai/api/paas/v4',
         envKey: 'ZAI_API_KEY',
     },
