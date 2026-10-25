@@ -1,0 +1,29 @@
+{
+  "name": "llm-arena",
+  "version": "1.0.0",
+  "description": "Arène de LLM sur un jeu de plateau tour par tour",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "arena:play": "node --env-file-if-exists=.env arena/play.js",
+    "arena:models": "node --env-file-if-exists=.env arena/list-models.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjaminbusselet/llm-board-game-arena.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/benjaminbusselet/llm-board-game-arena/issues"
+  },
+  "homepage": "https://github.com/benjaminbusselet/llm-board-game-arena#readme",
+  "devDependencies": {
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  },
+  "private": true
+}

@@ -1,37 +1,16 @@
-body,
-.modal-content {
+body {
     background-color: DarkKhaki !important;
 }
 
-#player1 {
-    background: url("../img/player1.svg");
-    background-repeat: repeat;
+.avatar {
     background-repeat: no-repeat;
     background-size: contain;
-    height: 200px !important;
     background-position: center;
+    height: 200px !important;
 }
 
-#player2 {
-    background: url("../img/player2.svg");
-    background-repeat: repeat;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 200px !important;
-    background-position: center;
-}
-
-.ambre_weapon,
-.silas_weapon {
+.weapon-img {
     height: 50px !important;
-}
-
-.content {
-    background-repeat: repeat;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: auto !important;
-    background-position: center;
 }
 
 table {
@@ -48,6 +27,8 @@ td {
     width: 50px;
     background-color: Cornsilk;
     background-size: 50px !important;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 tr {
@@ -58,30 +39,7 @@ tr {
     background-color: SaddleBrown;
 }
 
-.pistol {
-    background-image: url("../img/pistol.png");
-}
-
-.rifle {
-    background-image: url("../img/rifle.png");
-}
-
-.grenade {
-    background-image: url("../img/grenade.png");
-}
-
-.knife {
-    background-image: url("../img/knife.png");
-}
-
-.ambre {
-    background-image: url("../img/player1.svg");
-}
-
-.silas {
-    background-image: url("../img/player2.svg");
-}
-
-td.active {
+td.reachable {
     background-color: forestgreen;
+    cursor: pointer;
 }
