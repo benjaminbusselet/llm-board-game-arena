@@ -1,4 +1,4 @@
-// Générateur pseudo-aléatoire déterministe (mulberry32) : une même graine donne le même plateau.
+// Générateur pseudo-aléatoire déterministe (mulberry32) : une même graine redonne les mêmes tirages au sort.
 export function createRng(seed) {
     let a = seed >>> 0;
     return function next() {

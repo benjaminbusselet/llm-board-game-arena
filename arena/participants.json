@@ -1,0 +1,56 @@
+{
+  "testeLe": "2026-11-12",
+  "zones": [
+    {
+      "editeur": "Cohere",
+      "places": 3,
+      "modeles": [
+        "cohere:c4ai-aya-expanse-32b",
+        "cohere:command-a-03-2025",
+        "cohere:command-a-plus-05-2026",
+        "cohere:command-a-reasoning-08-2025",
+        "cohere:command-r-08-2024",
+        "cohere:command-r-plus-08-2024",
+        "cohere:command-r7b-12-2024",
+        "cohere:tiny-aya-global",
+        "openrouter:cohere/north-mini-code:free"
+      ]
+    },
+    {
+      "editeur": "Google",
+      "places": 3,
+      "modeles": [
+        "google:gemini-3-flash-preview",
+        "google:gemini-3.1-flash-lite-preview",
+        "google:gemini-3.5-flash-lite",
+        "google:gemini-3.6-flash",
+        "google:gemini-4-hydrogen",
+        "google:gemma-4-26b-a4b-it",
+        "google:gemma-4-31b-it"
+      ]
+    },
+    {
+      "editeur": "NVIDIA",
+      "places": 2,
+      "modeles": [
+        "nvidia:nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+        "nvidia:nvidia/nemotron-3-ultra-550b-a55b",
+        "nvidia:nvidia/nemotron-3.5-bolt-e4b",
+        "nvidia:nvidia/nemotron-3.5-lightning-30b-a3b",
+        "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b"
+      ]
+    },
+    {
+      "editeur": "Liquid",
+      "places": 1,
+      "modeles": ["openrouter:liquid/lfm-2.5-2.6b:free", "openrouter:liquid/lfm-3-1.7b:free"]
+    },
+    { "editeur": "OpenAI", "places": 1, "modeles": ["groq:openai/gpt-oss-120b"] },
+    { "editeur": "Alibaba (Qwen)", "places": 1, "modeles": ["groq:qwen/qwen3.8-27b"] },
+    { "editeur": "Poolside", "places": 1, "modeles": ["nvidia:poolside/laguna-xs-2.1"] },
+    { "editeur": "Apodex", "places": 1, "modeles": ["openrouter:apodex/apodex-1.1-mini:free"] },
+    { "editeur": "Baidu", "places": 1, "modeles": ["openrouter:baidu/ernie-5.5-flash-preview:free"] },
+    { "editeur": "Particle AI", "places": 1, "modeles": ["openrouter:particle-ai/particle-1:free"] },
+    { "editeur": "Recursive", "places": 1, "modeles": ["openrouter:recursive/flint-v1.0:free"] }
+  ]
+}

@@ -1,26 +1,13 @@
-// Joueurs de l'arène : "random" (référence sans clé) ou "fournisseur:modèle".
-import { isLegal, legalActions } from '../src/engine/game.js';
+// Accès aux modèles : "fournisseur:modèle" devient un client qui sait répondre à une conversation.
+// Rien ici ne dépend des règles du jeu.
 import { getProvider } from './providers.js';
-import { buildUserPrompt, parseAction, SYSTEM_PROMPT } from './prompt.js';
 
-export const MAX_ATTEMPTS = 3;
+export const MAX_ATTEMPTS = 3; // Essais accordés au modèle pour rendre une réponse valide.
 export const TEMPERATURE = 0.2;
 const TIMEOUT_MS = 60_000;
 const BACKOFF_SECONDS = [5, 15, 45]; // Attente avant chaque nouvel essai après une panne passagère.
 
-export function createPlayer(spec) {
-    if (spec === 'random') {
-        return {
-            id: 'random',
-            async check() {},
-            async chooseAction(state) {
-                const actions = legalActions(state);
-                const action = actions[Math.floor(Math.random() * actions.length)];
-                return { action, attempts: 1, latencyMs: 0, usage: null, fallback: false };
-            },
-        };
-    }
-
+export function createClient(spec) {
     const [providerName, ...modelParts] = spec.split(':');
     const model = modelParts.join(':'); // Les modèles OpenRouter gratuits finissent par ":free".
     if (!model) throw new Error(`Format attendu : fournisseur:modèle (reçu : ${spec})`);
@@ -28,53 +15,15 @@ export function createPlayer(spec) {
 
     return {
         id: spec,
-        // Appel court avant la partie : inutile de commencer si le modèle ne répond pas.
+        // Renvoie { content, usage, latencyMs }. Lève une erreur si le fournisseur reste en panne après les nouveaux essais.
+        async ask(messages) {
+            const start = performance.now();
+            const reply = await chat(provider, model, messages);
+            return { ...reply, latencyMs: Math.round(performance.now() - start) };
+        },
+        // Appel court avant un combat : inutile de commencer si le modèle ne répond pas.
         async check() {
             await chat(provider, model, [{ role: 'user', content: 'Réponds uniquement par {"ok":true}' }], 1);
-        },
-        async chooseAction(state) {
-            const messages = [
-                { role: 'system', content: SYSTEM_PROMPT },
-                { role: 'user', content: buildUserPrompt(state) },
-            ];
-            const usage = { prompt_tokens: 0, completion_tokens: 0 };
-            const errors = [];
-            const start = performance.now();
-
-            for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-                let reply;
-                try {
-                    reply = await chat(provider, model, messages);
-                } catch (error) {
-                    errors.push(error.message);
-                    continue;
-                }
-                usage.prompt_tokens += reply.usage?.prompt_tokens ?? 0;
-                usage.completion_tokens += reply.usage?.completion_tokens ?? 0;
-
-                const action = parseAction(reply.content);
-                const latencyMs = Math.round(performance.now() - start);
-                if (isLegal(state, action)) {
-                    return { action, attempts: attempt, latencyMs, usage, fallback: false, errors };
-                }
-                errors.push(`Coup illégal : ${reply.content?.slice(0, 200)}`);
-                messages.push(
-                    { role: 'assistant', content: reply.content ?? '' },
-                    { role: 'user', content: 'Ce coup est illégal ou mal formé. Réponds uniquement par un objet JSON copié de la liste des coups légaux.' },
-                );
-            }
-
-            // Une panne du fournisseur n'est pas une faute du modèle : la partie est annulée plutôt que faussée.
-            const apiErrors = errors.filter(e => !e.startsWith('Coup illégal'));
-            if (apiErrors.length > 0) {
-                throw new Error(`Fournisseur indisponible pour ${spec} : ${apiErrors.at(-1).slice(0, 200)}`);
-            }
-
-            // Après trois réponses illégales, coup aléatoire signalé dans le journal.
-            const actions = legalActions(state);
-            const action = actions[Math.floor(Math.random() * actions.length)];
-            const latencyMs = Math.round(performance.now() - start);
-            return { action, attempts: MAX_ATTEMPTS, latencyMs, usage, fallback: true, errors };
         },
     };
 }

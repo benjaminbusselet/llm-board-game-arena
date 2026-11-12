@@ -1,44 +1,39 @@
-# LLM Board Game Arena
+# LLM Arena
 
-Des LLM de toutes origines (américains, chinois, européens, ouverts ou fermés) s'affrontent sur un jeu de plateau tour par tour. Chaque coup est vérifié par le moteur du jeu, et chaque partie mesure la victoire, le coût en tokens et le temps de réponse.
+Un tournoi de boxe simulée entre LLM gratuits de toutes origines. À chaque round, les deux modèles choisissent leurs actions en secret, un arbitre en code résout l'échange, et le combat se gagne par KO ou aux points.
 
-## Versions
+Ce qui est mesuré : la capacité d'un modèle à lire son adversaire et à s'adapter, le respect du format de réponse, le temps de réponse et les tokens consommés.
 
-| Version | Contenu | Technologies |
-|---|---|---|
-| [v1.0](https://github.com/benjaminbusselet/llm-board-game-arena/tree/v1.0) | Projet 6 d'OpenClassrooms « Créez un jeu de plateau tour par tour en JS » (2020) : jeu à deux joueurs sur le même écran | jQuery, Bootstrap, PHP pour servir la page |
-| v2 (branche `master`) | Moteur séparé de l'affichage et testé, arène où des LLM jouent l'un contre l'autre | JavaScript (modules ES), Vite, Vitest, Node.js, API compatibles OpenAI |
+## État
 
-## Règles du jeu
+Le tournoi est en préparation.
 
-- Plateau de 10 × 10 avec 15 murs et 3 armes placés au hasard. Chaque joueur commence avec un couteau (10 points de dégâts).
-- À chaque tour, le joueur avance de 1 à 3 cases en ligne droite. Arriver sur une arme la ramasse et dépose l'ancienne.
-- Arriver à côté de l'adversaire déclenche le combat : attaquer, ou se défendre pour diviser par deux les dégâts reçus.
-- Chaque joueur a 100 points de vie. Celui qui tombe à 0 perd.
+- Fait : accès à 8 fournisseurs, inventaire et qualification des modèles gratuits, règlement.
+- À faire : moteur du combat, éliminatoires, phase finale, publication des résultats.
 
-## Lancer le jeu
+## Documents
 
-```
-npm install
-npm run dev
-```
+- [Règlement du tournoi](arena/REGLEMENT.md)
+- [Modèles candidats, par éditeur](arena/participants.json)
 
-## Arène
+## Utilisation
 
-1. Copier `.env.example` en `.env` et ajouter au moins une clé (Groq, OpenRouter, NVIDIA, Z.ai, Google, Mistral).
-2. Lister les modèles d'un fournisseur : `npm run arena:models -- groq`
-3. Lancer une partie : `npm run arena:play -- --p1 groq:<modèle> --p2 openrouter:<modèle>:free --seed 42`
-
-`random` joue un coup légal au hasard (référence, sans clé). Chaque partie écrit un journal JSONL dans `arena/logs/`.
+1. `npm install`
+2. Copier `.env.example` en `.env` et ajouter au moins une clé.
+3. Lister les modèles d'un fournisseur : `npm run arena:models -- groq`
+4. Lancer les tests : `npm test`
 
 ## Structure
 
-- `src/engine/` : règles du jeu, sans DOM, testées avec Vitest (`npm test`).
-- `src/ui/` : affichage dans le navigateur.
-- `arena/` : prompt, appels aux API compatibles OpenAI, déroulé d'une partie.
+- `arena/providers.js` : fournisseurs d'accès, tous compatibles avec l'API d'OpenAI.
+- `arena/players.js` : appels aux modèles, nouveaux essais en cas de panne, test de disponibilité.
+- `arena/rng.js` : générateur aléatoire à graine, pour des tirages au sort rejouables.
 
-## Feuille de route
+## Versions précédentes
 
-- Tournois entre modèles gratuits, avec un classement Elo publié sur GitHub Pages.
-- Montée en gamme : modèles économiques, intermédiaires, puis haut de gamme.
-- Un petit modèle ouvert fine-tuné sur le jeu, ajouté comme concurrent.
+Ce dépôt a d'abord contenu un jeu de plateau, conservé sous deux étiquettes Git.
+
+| Étiquette | Contenu | Technologies |
+|---|---|---|
+| [v1.0](https://github.com/benjaminbusselet/llm-board-game-arena/tree/v1.0) | Projet 6 d'OpenClassrooms « Créez un jeu de plateau tour par tour en JS » (2020) | jQuery, Bootstrap, PHP |
+| v2.0 | Jeu réécrit avec un moteur séparé de l'affichage et testé, et première arène où des LLM y jouent | JavaScript (modules ES), Vite, Vitest, Node.js |
