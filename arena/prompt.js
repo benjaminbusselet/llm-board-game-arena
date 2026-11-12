@@ -1,4 +1,5 @@
 // Traduction de l'état du jeu en texte pour le LLM.
+import { createHash } from 'node:crypto';
 import { legalActions } from '../src/engine/game.js';
 
 const WEAPON_SYMBOLS = { knife: 'k', pistol: 'p', grenade: 'g', rifle: 'r' };
@@ -14,6 +15,9 @@ Règles :
 - Chaque joueur a 100 points de vie. Celui qui tombe à 0 perd. Au-delà de la limite de coups, c'est un match nul.
 
 Réponds uniquement par un objet JSON choisi dans la liste des coups légaux, sans texte autour.`;
+
+// Empreinte du prompt système : change dès que les consignes changent, pour comparer des parties à prompt égal.
+export const PROMPT_VERSION = createHash('sha256').update(SYSTEM_PROMPT).digest('hex').slice(0, 8);
 
 export function renderBoard(state) {
     const lines = ['   ' + [...Array(state.config.cols).keys()].join(' ')];

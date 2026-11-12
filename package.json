@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "arena:play": "node --env-file-if-exists=.env arena/play.js",
-    "arena:models": "node --env-file-if-exists=.env arena/list-models.js"
+    "arena:models": "node --env-file-if-exists=.env arena/list-models.js",
+    "arena:report": "node arena/report.js"
   },
   "repository": {
     "type": "git",

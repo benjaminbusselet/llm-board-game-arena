@@ -3,13 +3,16 @@ import { isLegal, legalActions } from '../src/engine/game.js';
 import { getProvider } from './providers.js';
 import { buildUserPrompt, parseAction, SYSTEM_PROMPT } from './prompt.js';
 
-const MAX_ATTEMPTS = 3;
+export const MAX_ATTEMPTS = 3;
+export const TEMPERATURE = 0.2;
 const TIMEOUT_MS = 60_000;
+const BACKOFF_SECONDS = [5, 15, 45]; // Attente avant chaque nouvel essai après une panne passagère.
 
 export function createPlayer(spec) {
     if (spec === 'random') {
         return {
             id: 'random',
+            async check() {},
             async chooseAction(state) {
                 const actions = legalActions(state);
                 const action = actions[Math.floor(Math.random() * actions.length)];
@@ -25,6 +28,10 @@ export function createPlayer(spec) {
 
     return {
         id: spec,
+        // Appel court avant la partie : inutile de commencer si le modèle ne répond pas.
+        async check() {
+            await chat(provider, model, [{ role: 'user', content: 'Réponds uniquement par {"ok":true}' }], 1);
+        },
         async chooseAction(state) {
             const messages = [
                 { role: 'system', content: SYSTEM_PROMPT },
@@ -57,7 +64,13 @@ export function createPlayer(spec) {
                 );
             }
 
-            // Après trois échecs, coup aléatoire signalé dans le journal.
+            // Une panne du fournisseur n'est pas une faute du modèle : la partie est annulée plutôt que faussée.
+            const apiErrors = errors.filter(e => !e.startsWith('Coup illégal'));
+            if (apiErrors.length > 0) {
+                throw new Error(`Fournisseur indisponible pour ${spec} : ${apiErrors.at(-1).slice(0, 200)}`);
+            }
+
+            // Après trois réponses illégales, coup aléatoire signalé dans le journal.
             const actions = legalActions(state);
             const action = actions[Math.floor(Math.random() * actions.length)];
             const latencyMs = Math.round(performance.now() - start);
@@ -66,7 +79,7 @@ export function createPlayer(spec) {
     };
 }
 
-async function chat(provider, model, messages, retries = 3) {
+async function chat(provider, model, messages, retries = 3, attempt = 0) {
     const response = await fetch(`${provider.baseUrl}/chat/completions`, {
         method: 'POST',
         headers: {
@@ -74,16 +87,22 @@ async function chat(provider, model, messages, retries = 3) {
             Authorization: `Bearer ${provider.apiKey}`,
             ...provider.headers,
         },
-        body: JSON.stringify({ model, messages, temperature: 0.2 }),
+        body: JSON.stringify({ model, messages, temperature: TEMPERATURE }),
         signal: AbortSignal.timeout(TIMEOUT_MS),
+    }).catch(error => {
+        // Délai dépassé ou coupure réseau : traité comme une panne passagère tant qu'il reste des essais.
+        if (retries === 0) throw error;
+        return { status: 0, headers: new Headers(), reason: error.message };
     });
 
-    // Quota par minute dépassé : on attend puis on réessaie.
-    if (response.status === 429 && retries > 0) {
-        const waitSeconds = Number(response.headers.get('retry-after')) || 20;
-        console.warn(`429 sur ${model}, nouvel essai dans ${waitSeconds} s`);
+    // Quota par minute dépassé ou panne passagère (5xx, délai dépassé) : on attend puis on réessaie.
+    const transient = response.status === 429 || response.status >= 500 || response.status === 0;
+    if (transient && retries > 0) {
+        const backoff = BACKOFF_SECONDS[attempt] ?? BACKOFF_SECONDS.at(-1);
+        const waitSeconds = Number(response.headers.get('retry-after')) || (response.status === 429 ? 20 : backoff);
+        console.warn(`${response.status || response.reason} sur ${model}, nouvel essai dans ${waitSeconds} s`);
         await new Promise(resolve => setTimeout(resolve, waitSeconds * 1000));
-        return chat(provider, model, messages, retries - 1);
+        return chat(provider, model, messages, retries - 1, attempt + 1);
     }
     if (!response.ok) {
         throw new Error(`HTTP ${response.status} : ${(await response.text()).slice(0, 300)}`);
