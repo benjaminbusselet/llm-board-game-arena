@@ -70,3 +70,16 @@ Ce projet est mené par Ben en collaboration avec une IA (Claude Code). Une entr
 - **Résultat** : second combat entre les deux mêmes modèles, gpt-oss-120b gagne par KO au round 5. Temps de réponse moyen : 2 915 ms contre 288 ms. Tokens : 9 107 contre 3 588.
 - **Limite** : ce combat n'a subi aucune attente, donc l'enregistrement d'une attente réelle reste à vérifier.
 - **Erreur de l'IA** : un bilan d'avancement mesuré contre un calendrier que Ben n'avait pas demandé. Écarté : le projet avance à l'envie, sans échéance.
+
+## 13/11/2026
+
+### 8. Préparer la reprise
+
+- **Qui** : Ben a demandé que les notes de suivi du projet, tenues hors du dépôt, soient corrigées pour que la prochaine séance reparte du script d'éliminatoires, puis que ce soit testé. L'IA a corrigé les notes et lancé les tests. Ben a demandé chaque nouveau test après chaque correction.
+- **Raison** : l'IA ne garde pas la mémoire d'une séance à l'autre. Elle repart de ces notes : si elles décrivent encore le jeu de plateau, elle proposera de reprendre le jeu de plateau.
+- **Fait** : trois tests à froid. À chaque fois, un agent sans aucun contexte reçoit les consignes de reprise et doit dire quelle est la prochaine tâche.
+- **Résultat** : les trois agents ont proposé le script d'éliminatoires. Le premier a relevé deux écarts entre les notes et ce journal, corrigés. Le deuxième n'a plus constaté de contradiction. Le troisième a respecté la limite de lecture ajoutée entre-temps, en vérifiant seulement que le script n'existait pas.
+- **Erreur de l'IA** : les notes attribuaient à deux combats des mesures de tokens venues d'un seul. Repérée par le premier test, corrigée.
+- **Limite** : la reprise ne revérifie plus les étapes déjà faites. Une erreur dans l'une d'elles passerait inaperçue.
+- **À savoir** : le journal JSONL du premier combat de l'étape 6 a été effacé avant le second. Il n'en reste que le récit ci-dessus.
+- **Prochaine tâche** : le script d'éliminatoires, selon le [règlement](arena/REGLEMENT.md).
