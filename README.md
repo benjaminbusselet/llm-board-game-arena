@@ -12,6 +12,22 @@ Le tournoi est en préparation.
 - Fait aussi : premier combat entre deux LLM. Suivi détaillé dans le [journal de bord](JOURNAL.md).
 - À faire : éliminatoires, phase finale, publication des résultats.
 
+## Méthode
+
+Ce projet est mené par un développeur en collaboration avec une IA (Claude Code). C'est aussi ce qu'il cherche à montrer : comment construire un benchmark à deux.
+
+- **Ben décide** : le format du jeu et du tournoi, les règles, ce qui est gardé, supprimé ou publié.
+- **L'IA propose et exécute** : elle écrit le code et les tests, lance les mesures, rédige, et signale les limites de ce qu'elle a fait.
+
+Les règles de travail imposées à l'IA :
+
+- un plan numéroté, validé avant toute tâche complexe ;
+- aucune suppression ni publication sans accord ;
+- toute affirmation vérifiée par un test ou une mesure, ou sourcée ;
+- les échecs sont rapportés, pas de complaisance.
+
+Le [journal de bord](JOURNAL.md) dit, étape par étape, qui a décidé quoi. Les commits écrits avec l'IA sont cosignés.
+
 ## Documents
 
 - [Règlement du tournoi](arena/REGLEMENT.md)
