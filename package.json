@@ -5,7 +5,8 @@
   "scripts": {
     "test": "vitest run",
     "arena:models": "node --env-file-if-exists=.env arena/list-models.js",
-    "arena:simulate": "node arena/simulate.js"
+    "arena:simulate": "node arena/simulate.js",
+    "arena:fight": "node --env-file-if-exists=.env arena/fight.js"
   },
   "repository": {
     "type": "git",

@@ -15,11 +15,13 @@ export function createClient(spec) {
 
     return {
         id: spec,
-        // Renvoie { content, usage, latencyMs }. Lève une erreur si le fournisseur reste en panne après les nouveaux essais.
+        // Renvoie { content, usage, waits, limits, latencyMs, waitMs }. Lève une erreur si le fournisseur reste en panne après les nouveaux essais.
+        // latencyMs est le temps de réponse du modèle, sans les attentes imposées par le fournisseur (waitMs).
         async ask(messages) {
             const start = performance.now();
             const reply = await chat(provider, model, messages);
-            return { ...reply, latencyMs: Math.round(performance.now() - start) };
+            const waitMs = reply.waits.reduce((sum, wait) => sum + wait.seconds * 1000, 0);
+            return { ...reply, waitMs, latencyMs: Math.round(performance.now() - start) - waitMs };
         },
         // Appel court avant un combat : inutile de commencer si le modèle ne répond pas.
         async check() {
@@ -28,7 +30,11 @@ export function createClient(spec) {
     };
 }
 
-async function chat(provider, model, messages, retries = 3, attempt = 0) {
+// En-têtes par lesquels un fournisseur annonce ses limites (Groq, Cohere). Google, NVIDIA et OpenRouter n'en renvoient pas.
+const LIMIT_HEADER = /ratelimit-limit|call-limit$/i;
+
+// `waits` cumule les attentes imposées par le fournisseur : elles font partie des contraintes mesurées.
+async function chat(provider, model, messages, retries = 3, attempt = 0, waits = []) {
     const response = await fetch(`${provider.baseUrl}/chat/completions`, {
         method: 'POST',
         headers: {
@@ -51,11 +57,13 @@ async function chat(provider, model, messages, retries = 3, attempt = 0) {
         const waitSeconds = Number(response.headers.get('retry-after')) || (response.status === 429 ? 20 : backoff);
         console.warn(`${response.status || response.reason} sur ${model}, nouvel essai dans ${waitSeconds} s`);
         await new Promise(resolve => setTimeout(resolve, waitSeconds * 1000));
-        return chat(provider, model, messages, retries - 1, attempt + 1);
+        waits.push({ status: response.status || 'délai dépassé', seconds: waitSeconds });
+        return chat(provider, model, messages, retries - 1, attempt + 1, waits);
     }
     if (!response.ok) {
         throw new Error(`HTTP ${response.status} : ${(await response.text()).slice(0, 300)}`);
     }
     const data = await response.json();
-    return { content: data.choices?.[0]?.message?.content, usage: data.usage };
+    const limits = Object.fromEntries([...response.headers].filter(([name]) => LIMIT_HEADER.test(name)));
+    return { content: data.choices?.[0]?.message?.content, usage: data.usage, waits, limits };
 }
