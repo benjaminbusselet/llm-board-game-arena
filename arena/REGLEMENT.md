@@ -32,7 +32,16 @@ Chaque éditeur forme une zone. La phase finale compte 16 places.
 - Victoire par KO si la santé d'un boxeur tombe à zéro. Sinon, décision aux points : le vainqueur d'un round marque 10 points, le perdant 9, et un round égal donne 10 partout.
 - Les deux boxeurs ont les mêmes conditions : il n'y a ni côté ni premier joueur.
 
-Les valeurs chiffrées (dégâts, coûts en endurance, résultat de chaque paire d'actions) sont fixées dans le code du moteur après équilibrage par simulation, puis recopiées ici avant le premier combat.
+Ce que fait chaque action :
+
+- le jab est le coup le plus rapide et le moins coûteux : il réduit les coups plus lents lancés en même temps, et touche malgré l'esquive ;
+- le crochet et l'uppercut frappent plus fort et coûtent plus d'endurance. L'uppercut traverse la garde, le crochet à moitié ;
+- la garde absorbe le jab et renvoie un contre ;
+- l'esquive fait rater le crochet et l'uppercut et place un contre ;
+- la récupération rend de l'endurance, mais le boxeur encaisse davantage ;
+- un coup lancé sans l'endurance nécessaire perd l'essentiel de sa force.
+
+Les valeurs chiffrées sont dans l'objet `RULES` de [boxing.js](boxing.js), seule source : le prompt envoyé aux modèles en est tiré. Elles ont été réglées par simulation entre boxeurs programmés (`npm run arena:simulate`) pour qu'aucune action répétée ne suffise à gagner.
 
 ## 4. Réponses invalides
 

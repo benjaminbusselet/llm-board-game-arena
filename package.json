@@ -4,7 +4,8 @@
   "description": "Arène de LLM : tournoi de boxe simulée entre modèles",
   "scripts": {
     "test": "vitest run",
-    "arena:models": "node --env-file-if-exists=.env arena/list-models.js"
+    "arena:models": "node --env-file-if-exists=.env arena/list-models.js",
+    "arena:simulate": "node arena/simulate.js"
   },
   "repository": {
     "type": "git",

@@ -8,8 +8,8 @@ Ce qui est mesuré : la capacité d'un modèle à lire son adversaire et à s'ad
 
 Le tournoi est en préparation.
 
-- Fait : accès à 8 fournisseurs, inventaire et qualification des modèles gratuits, règlement.
-- À faire : moteur du combat, éliminatoires, phase finale, publication des résultats.
+- Fait : accès à 8 fournisseurs, inventaire des modèles gratuits, règlement, moteur du combat équilibré par simulation.
+- À faire : prompt et combat entre deux LLM, éliminatoires, phase finale, publication des résultats.
 
 ## Documents
 
@@ -22,9 +22,12 @@ Le tournoi est en préparation.
 2. Copier `.env.example` en `.env` et ajouter au moins une clé.
 3. Lister les modèles d'un fournisseur : `npm run arena:models -- groq`
 4. Lancer les tests : `npm test`
+5. Simuler des combats entre boxeurs programmés, sans LLM : `npm run arena:simulate`
 
 ## Structure
 
+- `arena/boxing.js` : moteur du combat, sans hasard ni appel réseau, testé avec Vitest.
+- `arena/bots.js` et `arena/simulate.js` : boxeurs programmés et simulation, pour équilibrer les règles.
 - `arena/providers.js` : fournisseurs d'accès, tous compatibles avec l'API d'OpenAI.
 - `arena/players.js` : appels aux modèles, nouveaux essais en cas de panne, test de disponibilité.
 - `arena/rng.js` : générateur aléatoire à graine, pour des tirages au sort rejouables.
