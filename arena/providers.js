@@ -22,9 +22,19 @@ export const PROVIDERS = {
         baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai',
         envKey: 'GEMINI_API_KEY',
     },
-    mistral: {
-        baseUrl: 'https://api.mistral.ai/v1',
-        envKey: 'MISTRAL_API_KEY',
+    // URL testées le 29/10/2026 (appel réussi).
+    cohere: {
+        baseUrl: 'https://api.cohere.com/compatibility/v1',
+        envKey: 'COHERE_API_KEY',
+    },
+    huggingface: {
+        baseUrl: 'https://router.huggingface.co/v1',
+        envKey: 'HF_TOKEN',
+    },
+    cloudflare: {
+        baseUrl: 'https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/v1',
+        envKey: 'CLOUDFLARE_API_TOKEN',
+        accountEnvKey: 'CLOUDFLARE_ACCOUNT_ID',
     },
 };
 
@@ -36,6 +46,13 @@ export function getProvider(name) {
     const apiKey = process.env[provider.envKey];
     if (!apiKey) {
         throw new Error(`Clé manquante : ajouter ${provider.envKey} dans le fichier .env`);
+    }
+    if (provider.accountEnvKey) {
+        const accountId = process.env[provider.accountEnvKey];
+        if (!accountId) {
+            throw new Error(`Identifiant manquant : ajouter ${provider.accountEnvKey} dans le fichier .env`);
+        }
+        return { ...provider, apiKey, baseUrl: provider.baseUrl.replace('{ACCOUNT_ID}', accountId) };
     }
     return { ...provider, apiKey };
 }
