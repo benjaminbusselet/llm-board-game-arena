@@ -103,3 +103,10 @@ Ce projet est mené par Ben en collaboration avec une IA (Claude Code). Une entr
 - **Conséquence** : 12 matchs d'éliminatoires (Cohere 5, Google 4, NVIDIA 3), au lieu de 14.
 - **Constat** : le délai de 60 s s'applique par appel. Les 177 s de `command-a-reasoning` et les 106 s de `gemma-4-26b` additionnent des essais expirés et le succès final. Délai conservé (règlement §4 et §10).
 - **Prochaine tâche** : choisir la graine, la publier, puis jouer les éliminatoires.
+
+### 11. Graine et barrages
+
+- **Qui** : Ben a choisi de garder `nemotron-3-ultra` malgré la panne, avec forfait s'il ne répond pas. L'IA a proposé la graine (entier tiré par `crypto.randomInt`), retesté ultra et créé le tournoi.
+- **Résultat** : ultra échoue au 3e test (délais dépassés, 503). Graine 2204209271. 3 barrages tirés : Cohere (command-r-plus / command-a-reasoning), Google (gemini-3.5-flash-lite / gemini-3.6-flash), NVIDIA (nemotron-3-nano-omni / nemotron-3.5-lightning).
+- **Écart au règlement §1** : ultra est conservé alors qu'il ne répond plus au test d'admission. Le §9 s'applique : report de 24 h une fois, puis forfait.
+- **Prochaine tâche** : publier `arena/tournoi.json`, puis jouer les 12 matchs.

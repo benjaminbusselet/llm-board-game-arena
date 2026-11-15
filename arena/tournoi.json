@@ -1,0 +1,107 @@
+{
+  "seed": 2204209271,
+  "creeLe": "2026-11-15T16:53:37.258Z",
+  "zones": [
+    {
+      "editeur": "Cohere",
+      "places": 4,
+      "candidats": [
+        "cohere:c4ai-aya-expanse-32b",
+        "cohere:command-a-03-2025",
+        "cohere:command-a-plus-05-2026",
+        "cohere:command-a-reasoning-08-2025",
+        "cohere:command-r-08-2024",
+        "cohere:command-r-plus-08-2024",
+        "cohere:command-r7b-12-2024",
+        "cohere:tiny-aya-global",
+        "openrouter:cohere/north-mini-code:free"
+      ],
+      "barragesTires": true,
+      "exemptes": [
+        "openrouter:cohere/north-mini-code:free",
+        "cohere:command-r-08-2024",
+        "cohere:c4ai-aya-expanse-32b",
+        "cohere:command-a-plus-05-2026",
+        "cohere:tiny-aya-global",
+        "cohere:command-a-03-2025",
+        "cohere:command-r7b-12-2024"
+      ]
+    },
+    {
+      "editeur": "Google",
+      "places": 3,
+      "candidats": [
+        "google:gemini-3-flash-preview",
+        "google:gemini-3.1-flash-lite-preview",
+        "google:gemini-3.5-flash-lite",
+        "google:gemini-3.6-flash",
+        "google:gemini-4-hydrogen",
+        "google:gemma-4-26b-a4b-it",
+        "google:gemma-4-31b-it"
+      ],
+      "barragesTires": true,
+      "exemptes": [
+        "google:gemini-4-hydrogen",
+        "google:gemini-3-flash-preview",
+        "google:gemma-4-26b-a4b-it",
+        "google:gemma-4-31b-it",
+        "google:gemini-3.1-flash-lite-preview"
+      ]
+    },
+    {
+      "editeur": "NVIDIA",
+      "places": 2,
+      "candidats": [
+        "nvidia:nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+        "nvidia:nvidia/nemotron-3-ultra-550b-a55b",
+        "nvidia:nvidia/nemotron-3.5-bolt-e4b",
+        "nvidia:nvidia/nemotron-3.5-lightning-30b-a3b",
+        "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b"
+      ],
+      "barragesTires": true,
+      "exemptes": [
+        "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "nvidia:nvidia/nemotron-3-ultra-550b-a55b",
+        "nvidia:nvidia/nemotron-3.5-bolt-e4b"
+      ]
+    }
+  ],
+  "matchs": [
+    {
+      "id": "Cohere/barrage/cohere:command-r-plus-08-2024~cohere:command-a-reasoning-08-2025",
+      "zone": "Cohere",
+      "tour": "barrage",
+      "a": "cohere:command-r-plus-08-2024",
+      "b": "cohere:command-a-reasoning-08-2025",
+      "combats": [],
+      "annules": {},
+      "reporteLe": null,
+      "vainqueur": null,
+      "motif": null
+    },
+    {
+      "id": "Google/barrage/google:gemini-3.5-flash-lite~google:gemini-3.6-flash",
+      "zone": "Google",
+      "tour": "barrage",
+      "a": "google:gemini-3.5-flash-lite",
+      "b": "google:gemini-3.6-flash",
+      "combats": [],
+      "annules": {},
+      "reporteLe": null,
+      "vainqueur": null,
+      "motif": null
+    },
+    {
+      "id": "NVIDIA/barrage/nvidia:nvidia/nemotron-3-nano-omni-30b-a3b-reasoning~nvidia:nvidia/nemotron-3.5-lightning-30b-a3b",
+      "zone": "NVIDIA",
+      "tour": "barrage",
+      "a": "nvidia:nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "b": "nvidia:nvidia/nemotron-3.5-lightning-30b-a3b",
+      "combats": [],
+      "annules": {},
+      "reporteLe": null,
+      "vainqueur": null,
+      "motif": null
+    }
+  ]
+}

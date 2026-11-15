@@ -25,6 +25,7 @@ Le [journal de bord](JOURNAL.md) dit, étape par étape, qui a décidé quoi. Le
 - [Règlement du tournoi](arena/REGLEMENT.md)
 - [Modèles candidats, par éditeur](arena/participants.json)
 - [Limites connues et mesures](arena/BENCHMARK.md)
+- [État du tournoi : graine, barrages, résultats](arena/tournoi.json)
 
 ## Utilisation
 
@@ -33,6 +34,7 @@ Le [journal de bord](JOURNAL.md) dit, étape par étape, qui a décidé quoi. Le
 3. Lister les modèles d'un fournisseur : `npm run arena:models -- groq`
 4. Lancer les tests : `npm test`
 5. Simuler des combats entre boxeurs programmés, sans LLM : `npm run arena:simulate`
+6. Éliminatoires : `npm run arena:tournoi -- --seed <entier>` crée le tournoi, `-- --limite <n>` joue au plus n combats, `-- --resultats` affiche l'état.
 
 ## Structure
 
@@ -66,8 +68,9 @@ Le détail de chaque étape est dans `JOURNAL.md` du dépôt du niveau 1.
 | Moteur de boxe, équilibré par simulation | Fait |
 | Combat complet entre deux LLM, avec journal et contraintes des fournisseurs | Fait (2 combats d'essai) |
 | Dépôt publié sur GitHub, avec journal de bord et section « Méthode » | Fait |
-| Script d'éliminatoires (`arena/`), selon le règlement : graine de tournoi publiée, tirage des barrages, match en 2 combats, départage, forfaits, reprise après panne, résultats par zone | Fait (logique testée, jamais lancé en réel) |
-| Retester avec le prompt de boxe les 3 candidats tombés sur une panne et les 7 modèles OpenRouter | Fait le 15/11 (`nemotron-3-ultra` en panne du fournisseur, à retester avant le tirage) |
+| Script d'éliminatoires (`arena/`), selon le règlement : graine de tournoi publiée, tirage des barrages, match en 2 combats, départage, forfaits, reprise après panne, résultats par zone | Fait (logique testée ; création du tournoi lancée en réel, aucun combat joué) |
+| Retester avec le prompt de boxe les 3 candidats tombés sur une panne et les 7 modèles OpenRouter | Fait le 15/11 (`nemotron-3-ultra` toujours en panne, gardé : forfait selon règlement §9 s'il ne répond pas) |
+| Graine 2204209271 tirée, 3 barrages tirés (`arena/tournoi.json`) | Fait, à publier avant de jouer |
 | Jouer les éliminatoires par éditeur (12 matchs), des petites zones vers Cohere | À faire, prochaine tâche |
 | Phase finale à 16 | À faire |
 | Résultats dans `arena/BENCHMARK.md` et sur GitHub Pages, puis post LinkedIn | À faire |
