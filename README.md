@@ -70,7 +70,7 @@ Le détail de chaque étape est dans `JOURNAL.md` du dépôt du niveau 1.
 | Dépôt publié sur GitHub, avec journal de bord et section « Méthode » | Fait |
 | Script d'éliminatoires (`arena/`), selon le règlement : graine de tournoi publiée, tirage des barrages, match en 2 combats, départage, forfaits, reprise après panne, résultats par zone | Fait (logique testée ; création du tournoi lancée en réel, aucun combat joué) |
 | Retester avec le prompt de boxe les 3 candidats tombés sur une panne et les 7 modèles OpenRouter | Fait le 15/11 (`nemotron-3-ultra` toujours en panne, gardé : forfait selon règlement §9 s'il ne répond pas) |
-| Graine 2204209271 tirée, 3 barrages tirés (`arena/tournoi.json`) | Fait, à publier avant de jouer |
+| Graine 2204209271 tirée, 3 barrages tirés (`arena/tournoi.json`) | Fait, publiée le 15/11 (commit `4127933`) |
 | Jouer les éliminatoires par éditeur (12 matchs), des petites zones vers Cohere | À faire, prochaine tâche |
 | Phase finale à 16 | À faire |
 | Résultats dans `arena/BENCHMARK.md` et sur GitHub Pages, puis post LinkedIn | À faire |
