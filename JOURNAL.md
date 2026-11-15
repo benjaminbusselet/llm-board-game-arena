@@ -83,3 +83,14 @@ Ce projet est mené par Ben en collaboration avec une IA (Claude Code). Une entr
 - **Limite** : la reprise ne revérifie plus les étapes déjà faites. Une erreur dans l'une d'elles passerait inaperçue.
 - **À savoir** : le journal JSONL du premier combat de l'étape 6 a été effacé avant le second. Il n'en reste que le récit ci-dessus.
 - **Prochaine tâche** : le script d'éliminatoires, selon le [règlement](arena/REGLEMENT.md).
+
+## 15/11/2026
+
+### 9. Script d'éliminatoires
+
+- **Qui** : Ben a validé le plan, puis chaque fichier avant copie dans le dépôt. L'IA a conçu et écrit le script, les tests et le brouillon.
+- **Fait** : `arena/tournoi.js` (état `arena/tournoi.json`, reprise, forfaits, report de 24 h, `--seed`, `--limite`, `--resultats`) et `arena/tournoi-logic.js` (barrages, tirages par graine, décision du match). `fight.js` annonce maintenant quel modèle ne répond pas.
+- **Résultat** : 14 matchs prévus (Cohere 6, Google 4, NVIDIA 3, Liquid 1). 39 tests passent, dont 14 nouveaux.
+- **Choix de l'IA que le règlement ne tranche pas** : paires du tour principal tirées au sort ; points et santé du départage comptés sur les 2 premiers combats ; combat annulé sans modèle identifiable rejoué sans limite.
+- **Limite** : `tournoi.js` n'a jamais été lancé en réel, seule la logique est testée.
+- **Prochaine tâche** : retester les 3 candidats en panne et les 7 modèles OpenRouter.

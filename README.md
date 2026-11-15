@@ -4,14 +4,6 @@ Un tournoi de boxe simulée entre LLM gratuits de toutes origines. À chaque rou
 
 Ce qui est mesuré : la capacité d'un modèle à lire son adversaire et à s'adapter, le respect du format de réponse, le temps de réponse et les tokens consommés.
 
-## État
-
-Le tournoi est en préparation.
-
-- Fait : accès à 8 fournisseurs, inventaire des modèles gratuits, règlement, moteur du combat équilibré par simulation.
-- Fait aussi : premier combat entre deux LLM. Suivi détaillé dans le [journal de bord](JOURNAL.md).
-- À faire : éliminatoires, phase finale, publication des résultats.
-
 ## Méthode
 
 Ce projet est mené par un développeur en collaboration avec une IA (Claude Code). C'est aussi ce qu'il cherche à montrer : comment construire un benchmark à deux.
@@ -32,6 +24,7 @@ Le [journal de bord](JOURNAL.md) dit, étape par étape, qui a décidé quoi. Le
 
 - [Règlement du tournoi](arena/REGLEMENT.md)
 - [Modèles candidats, par éditeur](arena/participants.json)
+- [Limites connues et mesures](arena/BENCHMARK.md)
 
 ## Utilisation
 
@@ -49,6 +42,7 @@ Le [journal de bord](JOURNAL.md) dit, étape par étape, qui a décidé quoi. Le
 - `arena/providers.js` : fournisseurs d'accès, tous compatibles avec l'API d'OpenAI.
 - `arena/players.js` : appels aux modèles, nouveaux essais en cas de panne, test de disponibilité.
 - `arena/rng.js` : générateur aléatoire à graine, pour des tirages au sort rejouables.
+- `arena/tournoi.js` et `arena/tournoi-logic.js` : éliminatoires, état dans `arena/tournoi.json` (`npm run arena:tournoi`).
 
 ## Versions précédentes
 
@@ -66,16 +60,16 @@ Le détail de chaque étape est dans `JOURNAL.md` du dépôt du niveau 1.
 | Étape | État |
 |---|---|
 | Jeu de plateau (v1 puis v2 avec Vite et moteur testé) | Terminé, retiré de `master`, conservé sous les étiquettes `v1.0` et `v2.0` |
-| Accès aux [fournisseurs gratuits](modeles.md#fournisseurs) | Fait (8 branchés, 7 testés, 5 utilisables : Groq, Cohere, Google, NVIDIA, OpenRouter ; Cloudflare non testé) |
+| Accès aux [fournisseurs gratuits](../parcours/modeles.md#fournisseurs) | Fait (8 branchés, 7 testés, 5 utilisables : Groq, Cohere, Google, NVIDIA, OpenRouter ; Cloudflare non testé) |
 | Inventaire et qualification des modèles gratuits | Fait (30 candidats de 11 éditeurs, `arena/participants.json`) |
 | Règlement du tournoi de boxe (`arena/REGLEMENT.md`) | Fait |
 | Moteur de boxe, équilibré par simulation | Fait |
 | Combat complet entre deux LLM, avec journal et contraintes des fournisseurs | Fait (2 combats d'essai) |
 | Dépôt publié sur GitHub, avec journal de bord et section « Méthode » | Fait |
-| Script d'éliminatoires (`arena/`), selon le règlement : graine de tournoi publiée, tirage des barrages, match en 2 combats, départage, forfaits, reprise après panne, résultats par zone | À faire, prochaine tâche |
-| Retester avec le prompt de boxe les 3 candidats tombés sur une panne et les 7 modèles OpenRouter | À faire, avant de jouer |
+| Script d'éliminatoires (`arena/`), selon le règlement : graine de tournoi publiée, tirage des barrages, match en 2 combats, départage, forfaits, reprise après panne, résultats par zone | Fait (logique testée, jamais lancé en réel) |
+| Retester avec le prompt de boxe les 3 candidats tombés sur une panne et les 7 modèles OpenRouter | À faire, prochaine tâche, avant de jouer |
 | Jouer les éliminatoires par éditeur (14 matchs), des petites zones vers Cohere | À faire |
 | Phase finale à 16 | À faire |
 | Résultats dans `arena/BENCHMARK.md` et sur GitHub Pages, puis post LinkedIn | À faire |
 | Cours « Building with the Claude API » (Anthropic Academy) | À faire |
-| [Tableau des modèles](modeles.md) étendu aux autres régions du monde, avec sources | À faire |
+| [Tableau des modèles](../parcours/modeles.md) étendu aux autres régions du monde, avec sources | À faire |

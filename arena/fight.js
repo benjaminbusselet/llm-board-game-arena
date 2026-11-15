@@ -79,7 +79,7 @@ const boxers = [createBoxer(values.p1, 0), createBoxer(values.p2, 1)];
 
 // Test de disponibilité : en cas d'échec, aucun combat n'est créé.
 try {
-    await Promise.all(boxers.map(b => b.check()));
+    await Promise.all(boxers.map(b => b.check().catch(error => { throw new Error(`${b.id} : ${error.message}`); })));
 } catch (error) {
     console.error(`Combat non lancé, un modèle ne répond pas : ${error.message.slice(0, 200)}`);
     process.exit(1);
