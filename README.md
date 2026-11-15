@@ -58,3 +58,24 @@ Ce dépôt a d'abord contenu un jeu de plateau, conservé sous deux étiquettes 
 |---|---|---|
 | [v1.0](https://github.com/benjaminbusselet/llm-board-game-arena/tree/v1.0) | Projet 6 d'OpenClassrooms « Créez un jeu de plateau tour par tour en JS » (2020) | jQuery, Bootstrap, PHP |
 | [v2.0](https://github.com/benjaminbusselet/llm-board-game-arena/tree/v2.0) | Jeu réécrit avec un moteur séparé de l'affichage et testé, et première arène où des LLM y jouent | JavaScript (modules ES), Vite, Vitest, Node.js |
+
+## État d'avancement
+
+Le détail de chaque étape est dans `JOURNAL.md` du dépôt du niveau 1.
+
+| Étape | État |
+|---|---|
+| Jeu de plateau (v1 puis v2 avec Vite et moteur testé) | Terminé, retiré de `master`, conservé sous les étiquettes `v1.0` et `v2.0` |
+| Accès aux [fournisseurs gratuits](modeles.md#fournisseurs) | Fait (8 branchés, 7 testés, 5 utilisables : Groq, Cohere, Google, NVIDIA, OpenRouter ; Cloudflare non testé) |
+| Inventaire et qualification des modèles gratuits | Fait (30 candidats de 11 éditeurs, `arena/participants.json`) |
+| Règlement du tournoi de boxe (`arena/REGLEMENT.md`) | Fait |
+| Moteur de boxe, équilibré par simulation | Fait |
+| Combat complet entre deux LLM, avec journal et contraintes des fournisseurs | Fait (2 combats d'essai) |
+| Dépôt publié sur GitHub, avec journal de bord et section « Méthode » | Fait |
+| Script d'éliminatoires (`arena/`), selon le règlement : graine de tournoi publiée, tirage des barrages, match en 2 combats, départage, forfaits, reprise après panne, résultats par zone | À faire, prochaine tâche |
+| Retester avec le prompt de boxe les 3 candidats tombés sur une panne et les 7 modèles OpenRouter | À faire, avant de jouer |
+| Jouer les éliminatoires par éditeur (14 matchs), des petites zones vers Cohere | À faire |
+| Phase finale à 16 | À faire |
+| Résultats dans `arena/BENCHMARK.md` et sur GitHub Pages, puis post LinkedIn | À faire |
+| Cours « Building with the Claude API » (Anthropic Academy) | À faire |
+| [Tableau des modèles](modeles.md) étendu aux autres régions du monde, avec sources | À faire |
