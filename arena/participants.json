@@ -1,9 +1,9 @@
 {
-  "testeLe": "2026-11-12",
+  "testeLe": "2026-11-15",
   "zones": [
     {
       "editeur": "Cohere",
-      "places": 3,
+      "places": 4,
       "modeles": [
         "cohere:c4ai-aya-expanse-32b",
         "cohere:command-a-03-2025",
@@ -43,12 +43,11 @@
     {
       "editeur": "Liquid",
       "places": 1,
-      "modeles": ["openrouter:liquid/lfm-2.5-2.6b:free", "openrouter:liquid/lfm-3-1.7b:free"]
+      "modeles": ["openrouter:liquid/lfm-3-1.7b:free"]
     },
     { "editeur": "OpenAI", "places": 1, "modeles": ["groq:openai/gpt-oss-120b"] },
     { "editeur": "Alibaba (Qwen)", "places": 1, "modeles": ["groq:qwen/qwen3.8-27b"] },
     { "editeur": "Poolside", "places": 1, "modeles": ["nvidia:poolside/laguna-xs-2.1"] },
-    { "editeur": "Apodex", "places": 1, "modeles": ["openrouter:apodex/apodex-1.1-mini:free"] },
     { "editeur": "Baidu", "places": 1, "modeles": ["openrouter:baidu/ernie-5.5-flash-preview:free"] },
     { "editeur": "Particle AI", "places": 1, "modeles": ["openrouter:particle-ai/particle-1:free"] },
     { "editeur": "Recursive", "places": 1, "modeles": ["openrouter:recursive/flint-v1.0:free"] }

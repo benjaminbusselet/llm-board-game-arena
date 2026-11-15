@@ -94,3 +94,12 @@ Ce projet est mené par Ben en collaboration avec une IA (Claude Code). Une entr
 - **Choix de l'IA que le règlement ne tranche pas** : paires du tour principal tirées au sort ; points et santé du départage comptés sur les 2 premiers combats ; combat annulé sans modèle identifiable rejoué sans limite.
 - **Limite** : `tournoi.js` n'a jamais été lancé en réel, seule la logique est testée.
 - **Prochaine tâche** : retester les 3 candidats en panne et les 7 modèles OpenRouter.
+
+### 10. Requalification et attribution des places
+
+- **Qui** : Ben a demandé de retester les 3 candidats en panne et les 7 modèles OpenRouter, a retiré Apodex et donné la 16e place à Cohere. L'IA a lancé le test sur les 30 candidats (les 3 pannes d'origine n'étaient consignées nulle part) et mis à jour les fichiers.
+- **Résultat** : 27 candidats valides. `liquid/lfm-2.5-2.6b` et `apodex/apodex-1.1-mini` retirés d'OpenRouter (404). `nemotron-3-ultra-550b` en panne chez NVIDIA (503, délais dépassés), à retester avant le tirage.
+- **Décision** : zone Apodex supprimée, Liquid qualifié d'office, Cohere passe à 4 places. Total : 16 places, 28 candidats de 10 éditeurs.
+- **Conséquence** : 12 matchs d'éliminatoires (Cohere 5, Google 4, NVIDIA 3), au lieu de 14.
+- **Constat** : le délai de 60 s s'applique par appel. Les 177 s de `command-a-reasoning` et les 106 s de `gemma-4-26b` additionnent des essais expirés et le succès final. Délai conservé (règlement §4 et §10).
+- **Prochaine tâche** : choisir la graine, la publier, puis jouer les éliminatoires.

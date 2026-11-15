@@ -61,14 +61,14 @@ Le détail de chaque étape est dans `JOURNAL.md` du dépôt du niveau 1.
 |---|---|
 | Jeu de plateau (v1 puis v2 avec Vite et moteur testé) | Terminé, retiré de `master`, conservé sous les étiquettes `v1.0` et `v2.0` |
 | Accès aux [fournisseurs gratuits](../parcours/modeles.md#fournisseurs) | Fait (8 branchés, 7 testés, 5 utilisables : Groq, Cohere, Google, NVIDIA, OpenRouter ; Cloudflare non testé) |
-| Inventaire et qualification des modèles gratuits | Fait (30 candidats de 11 éditeurs, `arena/participants.json`) |
+| Inventaire et qualification des modèles gratuits | Fait (28 candidats de 10 éditeurs depuis le 15/11, `arena/participants.json`) |
 | Règlement du tournoi de boxe (`arena/REGLEMENT.md`) | Fait |
 | Moteur de boxe, équilibré par simulation | Fait |
 | Combat complet entre deux LLM, avec journal et contraintes des fournisseurs | Fait (2 combats d'essai) |
 | Dépôt publié sur GitHub, avec journal de bord et section « Méthode » | Fait |
 | Script d'éliminatoires (`arena/`), selon le règlement : graine de tournoi publiée, tirage des barrages, match en 2 combats, départage, forfaits, reprise après panne, résultats par zone | Fait (logique testée, jamais lancé en réel) |
-| Retester avec le prompt de boxe les 3 candidats tombés sur une panne et les 7 modèles OpenRouter | À faire, prochaine tâche, avant de jouer |
-| Jouer les éliminatoires par éditeur (14 matchs), des petites zones vers Cohere | À faire |
+| Retester avec le prompt de boxe les 3 candidats tombés sur une panne et les 7 modèles OpenRouter | Fait le 15/11 (`nemotron-3-ultra` en panne du fournisseur, à retester avant le tirage) |
+| Jouer les éliminatoires par éditeur (12 matchs), des petites zones vers Cohere | À faire, prochaine tâche |
 | Phase finale à 16 | À faire |
 | Résultats dans `arena/BENCHMARK.md` et sur GitHub Pages, puis post LinkedIn | À faire |
 | Cours « Building with the Claude API » (Anthropic Academy) | À faire |
