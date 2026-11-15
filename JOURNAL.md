@@ -110,3 +110,11 @@ Ce projet est mené par Ben en collaboration avec une IA (Claude Code). Une entr
 - **Résultat** : ultra échoue au 3e test (délais dépassés, 503). Graine 2204209271. 3 barrages tirés : Cohere (command-r-plus / command-a-reasoning), Google (gemini-3.5-flash-lite / gemini-3.6-flash), NVIDIA (nemotron-3-nano-omni / nemotron-3.5-lightning).
 - **Écart au règlement §1** : ultra est conservé alors qu'il ne répond plus au test d'admission. Le §9 s'applique : report de 24 h une fois, puis forfait.
 - **Prochaine tâche** : jouer les 12 matchs d'éliminatoires (3 barrages, puis 9 matchs créés à leur fin).
+
+### 12. Documentation des matchs
+
+- **Qui** : Ben a décidé que chaque match soit documenté dans un fichier dédié, avec la consigne en tête et un renvoi depuis le README, et fixé l'ordre Cohere, Google, NVIDIA. L'IA a vérifié ce que `tournoi.js` enregistrait, proposé et écrit les modifications.
+- **Fait** : `arena/RESULTS.md` ; mesures, incidents et copie des journaux dans `tournoi.js` ; boucle réécrite pour finir un match avant le suivant. Test à froid du skill par un sous-agent : tâche et règle retrouvées.
+- **Erreurs de l'IA** : consigne d'abord écrite dans `JOURNAL.md` (retirée) ; code montré dans le scratchpad, que Ben ne peut pas lire.
+- **Limite** : `tournoi.js` n'a pas de test automatisé, les modifications ne sont pas validées en réel.
+- **Prochaine tâche** : premier combat réel avec `--limite 1`.

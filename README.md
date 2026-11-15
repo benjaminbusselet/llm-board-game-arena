@@ -26,6 +26,7 @@ Le [journal de bord](JOURNAL.md) dit, étape par étape, qui a décidé quoi. Le
 - [Modèles candidats, par éditeur](arena/participants.json)
 - [Limites connues et mesures](arena/BENCHMARK.md)
 - [État du tournoi : graine, barrages, résultats](arena/tournoi.json)
+- [Résultats des matchs](arena/RESULTS.md) : à compléter après chaque match, selon la consigne en tête du fichier
 
 ## Utilisation
 
@@ -71,7 +72,9 @@ Le détail de chaque étape est dans `JOURNAL.md` du dépôt du niveau 1.
 | Script d'éliminatoires (`arena/`), selon le règlement : graine de tournoi publiée, tirage des barrages, match en 2 combats, départage, forfaits, reprise après panne, résultats par zone | Fait (logique testée ; création du tournoi lancée en réel, aucun combat joué) |
 | Retester avec le prompt de boxe les 3 candidats tombés sur une panne et les 7 modèles OpenRouter | Fait le 15/11 (`nemotron-3-ultra` toujours en panne, gardé : forfait selon règlement §9 s'il ne répond pas) |
 | Graine 2204209271 tirée, 3 barrages tirés (`arena/tournoi.json`) | Fait, publiée le 15/11 (commit `4127933`) |
-| Jouer les éliminatoires par éditeur (12 matchs), des petites zones vers Cohere | À faire, prochaine tâche |
+| Documentation des matchs : `arena/RESULTS.md` avec consigne et gabarit ; `tournoi.js` enregistre tokens, temps, attentes, incidents et copie les journaux dans `arena/tournoi-logs/` ; un match se joue en entier avant le suivant | Fait, jamais lancé en réel |
+| Premier combat réel avec `--limite 1` (Cohere, premier barrage) pour valider `tournoi.js`, puis première entrée de `arena/RESULTS.md` | À faire, prochaine tâche |
+| Jouer les éliminatoires par éditeur (12 matchs), dans l'ordre Cohere, Google, NVIDIA ; chaque match se joue en entier avant le suivant | À faire |
 | Phase finale à 16 | À faire |
 | Résultats dans `arena/BENCHMARK.md` et sur GitHub Pages, puis post LinkedIn | À faire |
 | Cours « Building with the Claude API » (Anthropic Academy) | À faire |
